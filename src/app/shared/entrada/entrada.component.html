@@ -1,0 +1,24 @@
+<div class="flex flex-col gap-1 w-full">
+  <!-- Label -->
+  <label class="block text-[14px] font-normal text-[#212529] mb-1">
+    {{ label }}
+  </label>
+
+  <input
+    [value]="value"
+    [type]="type"
+    [formControl]="control"
+    [placeholder]="placeholder"
+    [disabled]="state === 'deshabilitado'"
+    class="w-full h-10 px-2 rounded-md text-[16px] focus:outline-none
+      border bg-[#FFFFFF] transition-colors"
+      [ngClass]="{
+        'border-[#929292] text-[#727272]': state === 'default',
+        'border-[#2698B3] text-[#212529]': state === 'focus',
+        'border-[#929292] text-[#212529]': state === 'completado',
+        'border-[#A10303] text-[#727272]': state === 'error',
+        'border-[#929292] text-[#575757]': state === 'quemado',
+        'border-[#E0E0E0] text-[#E0E0E0] placeholder:text-[#E0E0E0]': state === 'deshabilitado'
+      }"
+  />
+</div>
