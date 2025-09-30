@@ -2,3 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Prospero-Bold";
+  src: url("/assets/fuentes/Prospero-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Prospero-BoldItalic";
+  src: url("/assets/fuentes/Prospero-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Prospero-Extralight";
+  src: url("/assets/fuentes/Prospero-Extralight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Prospero-ExtralightItalic";
+  src: url("/assets/fuentes/Prospero-ExtralightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Prospero-Regular";
+  src: url("/assets/fuentes/Prospero-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Prospero-RegularItalic";
+  src: url("/assets/fuentes/Prospero-RegularItalic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Prospero-SemiBold";
+  src: url("/assets/fuentes/Prospero-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Prospero-SemiBoldItalic";
+  src: url("/assets/fuentes/Prospero-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}

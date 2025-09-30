@@ -59,6 +59,7 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit(): void {
     this.setValidatorsForTipo(this.form.get('tipoIdentificacion')?.value);
+    this.form.get('indicativo')?.disable()
 
     this.form.get('tipoIdentificacion')?.valueChanges.subscribe((val) => {
       this.onTipoChange(val);

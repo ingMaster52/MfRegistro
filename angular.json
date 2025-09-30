@@ -24,6 +24,11 @@
 								"glob": "**/*",
 								"input": "public",
 								"output": "."
+							},
+							{
+								"glob": "**/*",
+								"input": "/assets/fuentes",
+								"output": "/assets/fuentes"
 							}
 						],
 						"styles": [
