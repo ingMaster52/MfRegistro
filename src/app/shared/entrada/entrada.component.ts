@@ -25,6 +25,7 @@ let nextId = 0;
 export class EntradaComponent implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() placeholder: string = '';
+  @Input() disabled = false;
   @Input() type: string = 'text';
   @Input() state:
     | 'default'
@@ -38,7 +39,6 @@ export class EntradaComponent implements ControlValueAccessor {
   id = `entrada-${nextId++}`;
 
   value: any = '';
-  disabled = false;
 
   onChange = (_: any) => {};
   onTouched = () => {};

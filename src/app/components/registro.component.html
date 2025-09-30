@@ -5,23 +5,22 @@
       Registro
     </h1>
   </div>
+
   <div
-    class="overflow-y-auto scrollbar-thin scrollbar-thumb-[#a2a2a2] scrollbar-track-[#ededed] rounded-md p-4"
+    class="overflow-y-auto scrollbar-thin scrollbar-thumb-scroll-thumb scrollbar-track-scroll-track rounded-md p-4"
   >
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-[656px]">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-656">
       <!-- Tipo de identificación + Número de identificación / NIT + DV -->
-      <div
-        class="grid grid-cols-[136px_24px_496px] items-start gap-0 max-w-[656px]"
-      >
+      <div class="grid grid-cols-[136px_24px_496px] items-start gap-0 max-w-656">
         <!-- Tipo -->
         <div>
-          <label for="tipoIdentificacion" class="block text-sm font-medium mb-1"
-            >Tipo</label
-          >
+          <label for="tipoIdentificacion" class="block text-sm font-medium mb-1">
+            Tipo
+          </label>
           <select
             formControlName="tipoIdentificacion"
             id="tipoIdentificacion"
-            class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+            class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-focusblue/20"
           >
             <option value="CC">C.C.</option>
             <option value="NIT">NIT</option>
@@ -32,12 +31,14 @@
         <div>
           <!-- Cuando es NIT: Numero NIT + DV -->
           <ng-container *ngIf="esNit; else numeroCompleto">
-            <div class="grid grid-cols-[1fr-48px] gap-4">
+            <div class="grid grid-cols-[336px_24px_136px] items-center">
               <app-entrada
                 label="Número NIT"
                 formControlName="numeroNit"
                 [state]="getState('numeroNit')"
               ></app-entrada>
+
+              <span class="text-lg text-center">-</span>
 
               <app-entrada
                 label="DV"
@@ -63,7 +64,7 @@
       <app-entrada
         [label]="
           form.get('tipoIdentificacion')?.value === 'NIT'
-            ? 'Razón social'
+            ? 'Nombre / Razón social'
             : 'Nombre'
         "
         formControlName="nombre"
@@ -80,13 +81,15 @@
       </div>
 
       <!-- Indicativo + Celular -->
-      <div class="mt-6 grid grid-cols-[120px_24px_1fr] items-start">
+      <div class="grid grid-cols-[120px_24px_512px] items-center">
         <app-entrada
           label="Indicativo"
           placeholder="+57"
           formControlName="indicativo"
           [state]="getState('indicativo')"
+          [disabled]="true"
         ></app-entrada>
+        <div></div>
 
         <app-entrada
           label="Número celular de contacto"
@@ -120,43 +123,43 @@
       ></app-entrada>
 
       <!-- Reglas de contraseña -->
-      <div class="max-w-[656px]">
+      <div class="max-w-656">
         <p class="font-medium mb-2">La contraseña debe contener:</p>
         <div class="space-y-2">
           <p
-            [class.text-red-600]="!passwordRules.longitud"
+            [class.text-errorred]="!passwordRules.longitud"
             [class.text-green-600]="passwordRules.longitud"
           >
             {{ passwordRules.longitud ? "✓" : "✗" }} Longitud entre 8 y 16
             caracteres.
           </p>
           <p
-            [class.text-red-600]="!passwordRules.mayuscula"
+            [class.text-errorred]="!passwordRules.mayuscula"
             [class.text-green-600]="passwordRules.mayuscula"
           >
             {{ passwordRules.mayuscula ? "✓" : "✗" }} Una letra mayúscula (A–Z).
           </p>
           <p
-            [class.text-red-600]="!passwordRules.minuscula"
+            [class.text-errorred]="!passwordRules.minuscula"
             [class.text-green-600]="passwordRules.minuscula"
           >
             {{ passwordRules.minuscula ? "✓" : "✗" }} Una letra minúscula (a–z).
           </p>
           <p
-            [class.text-red-600]="!passwordRules.numero"
+            [class.text-errorred]="!passwordRules.numero"
             [class.text-green-600]="passwordRules.numero"
           >
             {{ passwordRules.numero ? "✓" : "✗" }} Un número (0–9).
           </p>
           <p
-            [class.text-red-600]="!passwordRules.especial"
+            [class.text-errorred]="!passwordRules.especial"
             [class.text-green-600]="passwordRules.especial"
           >
             {{ passwordRules.especial ? "✓" : "✗" }} Un carácter especial
             (&#64;, #, $, %, &, *, +, -).
           </p>
           <p
-            [class.text-red-600]="!passwordRules.noInicial"
+            [class.text-errorred]="!passwordRules.noInicial"
             [class.text-green-600]="passwordRules.noInicial"
           >
             {{ passwordRules.noInicial ? "✓" : "✗" }} Sin espacios al principio
@@ -166,7 +169,7 @@
       </div>
 
       <!-- Checkboxes -->
-      <div class="max-w-[656px] space-y-4">
+      <div class="max-w-656 space-y-4">
         <div class="flex items-start space-x-2">
           <input
             type="checkbox"
@@ -176,9 +179,7 @@
           />
           <label for="terminos" class="text-sm">
             Acepto los
-            <a href="#" class="text-blue-600 underline"
-              >Términos y Condiciones</a
-            >.
+            <a href="#" class="text-focusblue underline">Términos y Condiciones</a>.
           </label>
         </div>
 
@@ -191,7 +192,7 @@
           />
           <label for="politica" class="text-sm">
             Autorizo el tratamiento de mis datos personales en la
-            <a href="#" class="text-blue-600 underline"
+            <a href="#" class="text-focusblue underline"
               >Política de tratamiento de datos</a
             >
           </label>
@@ -200,7 +201,7 @@
 
       <!-- Botón -->
       <button
-        class="w-[328px] h-[48px] rounded-md bg-[#212529] text-[#FFFFFF] text-[16px] font-medium px-6 py-2 hover:bg-[#3B4350] disabled:bg-[#E0E0E0] disabled:text-[#E0E0E0] transition-colors duration-200"
+        class="w-328 h-48 rounded-md bg-brand-dark text-white text-16 font-medium px-6 py-2 hover:bg-brand-hover disabled:bg-brand-light disabled:text-brand-light transition-colors duration-200"
       >
         Registrarme
       </button>
