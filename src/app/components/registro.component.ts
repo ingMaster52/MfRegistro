@@ -60,11 +60,11 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     this.setValidatorsForTipo(this.form.get('tipoIdentificacion')?.value);
 
-    this.form.get('tipoIdentificacion')?.valueChanges.subscribe((val) => {
+    this.form.get('tipoIdentificacion')?.valueChanges.subscribe((val: string) => {
       this.onTipoChange(val);
     });
     // observar cambios en contraseña para checklist
-    this.form.get('password')?.valueChanges.subscribe((val) => {
+    this.form.get('password')?.valueChanges.subscribe((val: string) => {
       this.validarPassword(val || '');
     });
   }
