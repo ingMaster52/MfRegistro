@@ -1,28 +1,43 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  FormControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+
+let nextId = 0;
 
 @Component({
   selector: 'app-entrada',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => EntradaComponent),
-    multi: true
-  }],
-  templateUrl: './entrada.component.html'
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => EntradaComponent),
+      multi: true,
+    },
+  ],
+  templateUrl: './entrada.component.html',
 })
-export class EntradaComponent implements ControlValueAccessor{
+export class EntradaComponent implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() type: string = 'text';
-  @Input() state: 'default' | 'focus' | 'completado' | 'error' | 'quemado' | 'deshabilitado' = 'default';
+  @Input() state:
+    | 'default'
+    | 'focus'
+    | 'completado'
+    | 'error'
+    | 'quemado'
+    | 'deshabilitado' = 'default';
 
-  @Input() control!: FormControl;
 
-value: any = '';
+  id = `entrada-${nextId++}`;
+
+  value: any = '';
   disabled = false;
 
   onChange = (_: any) => {};
@@ -49,5 +64,5 @@ value: any = '';
     this.value = target.value;
     this.onChange(this.value);
     this.onTouched();
-  }  
+  }
 }

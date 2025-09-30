@@ -1,58 +1,62 @@
-<div class="max-w-lg mx-auto p-6">
+<div class="mx-auto p-6">
   <div class="flex items-center gap-2 mb-10">
-    <button class="text-x1">←</button>
-    <h1 class="font-prospero font-normal text-[40px] text-left mt-0">Registro</h1>
+    <a class="text-x1 text-gray-700 hover:text-black"> ← </a>
+    <h1 class="font-prospero font-normal text-[40px] text-left leading-[48px]">
+      Registro
+    </h1>
   </div>
-  <form
-    [formGroup]="form"
-    (ngSubmit)="onSubmit()"
-    class="max-w-[656px] space-y-6"
+  <div
+    class="overflow-y-auto scrollbar-thin scrollbar-thumb-[#a2a2a2] scrollbar-track-[#ededed] rounded-md p-4"
   >
-
-    <div
-      class="max-h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-[#a2a2a2] scrollbar-track-[#ededed] rounded-md p-4"
-    >
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-[656px]">
       <!-- Tipo de identificación + Número de identificación / NIT + DV -->
-      <div class="flex items-start gap-6">
+      <div
+        class="grid grid-cols-[136px_24px_496px] items-start gap-0 max-w-[656px]"
+      >
         <!-- Tipo -->
-        <div class="w-[136px]">
-          <label class="block text-sm font-medium mb-1">Tipo</label>
+        <div>
+          <label for="tipoIdentificacion" class="block text-sm font-medium mb-1"
+            >Tipo</label
+          >
           <select
             formControlName="tipoIdentificacion"
+            id="tipoIdentificacion"
             class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
           >
             <option value="CC">C.C.</option>
             <option value="NIT">NIT</option>
           </select>
         </div>
+        <div></div>
 
-        <!-- Cuando es NIT: Numero NIT + DV -->
-        <ng-container *ngIf="esNit; else numeroCompleto">
-          <app-entrada
-            label="Número NIT"
-            placeholder="123456789"
-            formControlName="numeroNit"
-            [state]="getState('numeroNit')"
-          ></app-entrada>
+        <div>
+          <!-- Cuando es NIT: Numero NIT + DV -->
+          <ng-container *ngIf="esNit; else numeroCompleto">
+            <div class="grid grid-cols-[1fr-48px] gap-4">
+              <app-entrada
+                label="Número NIT"
+                formControlName="numeroNit"
+                [state]="getState('numeroNit')"
+              ></app-entrada>
 
-          <app-entrada
-            label="DV"
-            placeholder="0"
-            formControlName="dv"
-            maxlength="1"
-            [state]="getState('dv')"
-          ></app-entrada>
-        </ng-container>
+              <app-entrada
+                label="DV"
+                formControlName="dv"
+                maxlength="1"
+                [state]="getState('dv')"
+              ></app-entrada>
+            </div>
+          </ng-container>
 
-        <!-- Cuando no es NIT: Número de identificación completo -->
-        <ng-template #numeroCompleto>
-          <app-entrada
-            label="Número de identificación"
-            placeholder="123456789"
-            formControlName="numeroIdentificacion"
-            [state]="getState('numeroIdentificacion')"
-          ></app-entrada>
-        </ng-template>
+          <!-- Cuando no es NIT: Número de identificación completo -->
+          <ng-template #numeroCompleto>
+            <app-entrada
+              label="Número de identificación"
+              formControlName="numeroIdentificacion"
+              [state]="getState('numeroIdentificacion')"
+            ></app-entrada>
+          </ng-template>
+        </div>
       </div>
 
       <!-- Nombre / Razón social -->
@@ -62,7 +66,6 @@
             ? 'Razón social'
             : 'Nombre'
         "
-        placeholder="Tu nombre"
         formControlName="nombre"
         [state]="getState('nombre')"
       ></app-entrada>
@@ -71,14 +74,13 @@
       <div *ngIf="!esNit">
         <app-entrada
           label="Apellido(s)"
-          placeholder="Tus apellidos"
           formControlName="apellidos"
           [state]="getState('apellidos')"
         ></app-entrada>
       </div>
 
       <!-- Indicativo + Celular -->
-      <div class="flex items-center space-x-6">
+      <div class="mt-6 grid grid-cols-[120px_24px_1fr] items-start">
         <app-entrada
           label="Indicativo"
           placeholder="+57"
@@ -88,7 +90,6 @@
 
         <app-entrada
           label="Número celular de contacto"
-          placeholder="3001234567"
           formControlName="celular"
           [state]="getState('celular')"
         ></app-entrada>
@@ -97,7 +98,6 @@
       <!-- Correo -->
       <app-entrada
         label="Correo electrónico"
-        placeholder="ejemplo@email.com"
         formControlName="correo"
         [state]="getState('correo')"
       ></app-entrada>
@@ -152,8 +152,8 @@
             [class.text-red-600]="!passwordRules.especial"
             [class.text-green-600]="passwordRules.especial"
           >
-            {{ passwordRules.especial ? "✓" : "✗" }} Un carácter especial (&#64;, #,
-            $, %, &, *, +, -).
+            {{ passwordRules.especial ? "✓" : "✗" }} Un carácter especial
+            (&#64;, #, $, %, &, *, +, -).
           </p>
           <p
             [class.text-red-600]="!passwordRules.noInicial"
@@ -204,6 +204,6 @@
       >
         Registrarme
       </button>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
